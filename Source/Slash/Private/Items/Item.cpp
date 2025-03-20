@@ -19,4 +19,11 @@ void AItem::BeginPlay()
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	UE_LOG(LogTemp, Warning, TEXT("DeltaTime : %f"),DeltaTime);
+	if (GEngine)
+	{
+		FString Name = GetName();
+		UE_LOG(LogTemp, Warning, TEXT("Name : %s"), *Name); 
+		GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, TEXT("Item spawned"));
+	}
 }
