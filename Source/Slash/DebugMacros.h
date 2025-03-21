@@ -8,3 +8,12 @@
 		DrawDebugLine(GetWorld(), Start, End, FColor::Green, true, -1.f, 0, 1.f); \
 		DrawDebugPoint(GetWorld(), End, 20.f, FColor::Green, true); \
 	}
+
+#define DRAW_SPHERE_SingleFrame(Location) if(GetWorld()) DrawDebugSphere(GetWorld(), Location, 24.f, 24, FColor::Green, false, -1.f);
+#define DRAW_LINE_SingleFrame(Start, End) if(GetWorld()) DrawDebugLine(GetWorld(), Start, End, FColor::Green, false,-1.f,0,1.f);
+#define DRAW_POINT_SingleFrame(Location) if(GetWorld()) DrawDebugPoint(GetWorld(), Location, 20.f, FColor::Green, false, -1.f);
+#define DRAW_VECTOR_SingleFrame(Start, End) if(GetWorld()) \
+	{ \
+		DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, -1.f, 0, 1.f); \
+		DrawDebugPoint(GetWorld(), End, 20.f, FColor::Green, false, -1.f); \
+	}
