@@ -22,7 +22,7 @@ protected:
 	float TimeConstant = 5.f;
 
 	UFUNCTION(BlueprintPure)
-	float TrasformedSin();
+	float TransformedSin();
 
 	UFUNCTION(BlueprintPure)
 	float TransformedCos();
@@ -30,5 +30,6 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	float RunningTime;
 
-
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* ItemMesh;
 };
