@@ -4,6 +4,8 @@
 #include "GameFramework/Pawn.h"
 #include "Bird.generated.h"
 
+class UCapsuleComponent;
+class USkeletalMeshComponent;
 UCLASS()
 class SLASH_API ABird : public APawn
 {
@@ -15,4 +17,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 protected:
 	virtual void BeginPlay() override;
+private:
+	UPROPERTY(VisibleAnywhere)
+	UCapsuleComponent* Capsule;
+
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* BirdMesh;
 };
