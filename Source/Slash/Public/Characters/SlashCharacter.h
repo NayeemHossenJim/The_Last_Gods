@@ -8,6 +8,7 @@
 class USpringArmComponent;
 class UCameraComponent;
 class AItem;
+class UAnimMontage;
 
 UCLASS()
 class SLASH_API ASlashCharacter : public ACharacter
@@ -25,8 +26,12 @@ protected:
 	void Turn(float Value);
 	void LookUp(float Value);
 	void EKeyPressed();
+	void Attack();
+
+	void PlayAttackMontage();
 private:
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+	EActionState ActionState = EActionState::EAS_Unoccupied;
 
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* Cameraboom;
@@ -36,6 +41,9 @@ private:
 
 	UPROPERTY(VisibleInstanceOnly)
 	AItem* OverlappingItem;
+
+	UPROPERTY(EditDefaultsOnly,Category = Montages)
+	UAnimMontage* AttackMontage;
 
 public:
 	FORCEINLINE void SetOverlappingItem(AItem* Item) { OverlappingItem = Item; }
