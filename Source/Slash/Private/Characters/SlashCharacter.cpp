@@ -73,7 +73,6 @@ void ASlashCharacter::EKeyPressed()
 		CharacterState = ECharacterState::ECS_EquippedOneHandedWeapon;
 		OverlappingItem = nullptr;
 		EquippedWeapon = OverlappingWeapon;
-
 	}
 	else
 	{
@@ -105,9 +104,9 @@ void ASlashCharacter::PlayAttackMontage()
 	if (AnimInstance && AttackMontage)
 	{
 		AnimInstance->Montage_Play(AttackMontage);
-		const int32 Section = FMath::RandRange(0, 3);
+		const int32 Selection = FMath::RandRange(0, 3);
 		FName SectionName = FName();
-		switch (Section)
+		switch (Selection)
 		{
 		case 0:
 			SectionName = FName("Attack1");
@@ -145,20 +144,19 @@ void ASlashCharacter::AttackEnd()
 
 bool ASlashCharacter::CanAttack()
 {
-	return (ActionState == EActionState::EAS_Unoccupied) && (CharacterState != ECharacterState::ECS_Unequipped);
+	return ActionState == EActionState::EAS_Unoccupied && CharacterState != ECharacterState::ECS_Unequipped;
 }
 
 bool ASlashCharacter::CanDisArm()
 {
-	return ActionState == EActionState::EAS_Unoccupied && 
-		CharacterState != ECharacterState::ECS_Unequipped ;
+	return ActionState == EActionState::EAS_Unoccupied && CharacterState != ECharacterState::ECS_Unequipped;
+	
 }
 
 bool ASlashCharacter::CanArm()
 {
-	return ActionState == EActionState::EAS_Unoccupied &&
-		CharacterState == ECharacterState::ECS_Unequipped &&
-		EquippedWeapon;
+	 return ActionState == EActionState::EAS_Unoccupied && CharacterState == ECharacterState::ECS_Unequipped ;
+	
 }
 
 void ASlashCharacter::Tick(float DeltaTime)
