@@ -12,19 +12,17 @@ class SLASH_API USlashAnimInstance : public UAnimInstance
 public:
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeUpdateAnimation(float DeltaTime) override;
-
 	UPROPERTY(BlueprintReadOnly)
 	class ASlashCharacter* SlashCharacter;
 
-	UPROPERTY(BlueprintReadOnly)
-	class UCharacterMovementComponent* MovementComponent;
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	class UCharacterMovementComponent* SlashCharacterMovement;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
 	float GroundSpeed;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
 	bool IsFalling;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Movement | Character State")
+	UPROPERTY(BlueprintReadOnly, Category = "Movement | CharacterState")
 	ECharacterState CharacterState;
 };

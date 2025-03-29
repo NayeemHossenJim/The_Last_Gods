@@ -53,10 +53,10 @@ private:
 	UPROPERTY(VisibleInstanceOnly)
 	AItem* OverlappingItem;
 
-	UPROPERTY(VisibleAnywhere,Category = Weapon)
+	UPROPERTY(VisibleAnywhere, Category = Weapon)
 	AWeapon* EquippedWeapon;
 
-	UPROPERTY(EditDefaultsOnly,Category = Montages)
+	UPROPERTY(EditDefaultsOnly, Category = Montages)
 	UAnimMontage* AttackMontage;
 
 	UPROPERTY(EditDefaultsOnly, Category = Montages)

@@ -16,8 +16,8 @@ UCLASS()
 class SLASH_API AItem : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	AItem();
 	virtual void Tick(float DeltaTime) override;
 protected:
@@ -41,7 +41,7 @@ protected:
 	UFUNCTION()
 	virtual void OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* ItemMesh;
 
 	EItemState ItemState = EItemState::EIS_Hovering;

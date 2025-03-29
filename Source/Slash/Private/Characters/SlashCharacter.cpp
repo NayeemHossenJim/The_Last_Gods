@@ -1,3 +1,4 @@
+
 #include "Characters/SlashCharacter.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -27,12 +28,12 @@ ASlashCharacter::ASlashCharacter()
 void ASlashCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 void ASlashCharacter::MoveForward(float Value)
 {
-	if (ActionState == EActionState::EAS_Attacking) return ;
+	if (ActionState == EActionState::EAS_Attacking) return;
 	if (Controller && (Value != 0.f))
 	{
 		const FRotator ControlRotation = GetControlRotation();
@@ -150,13 +151,13 @@ bool ASlashCharacter::CanAttack()
 bool ASlashCharacter::CanDisArm()
 {
 	return ActionState == EActionState::EAS_Unoccupied && CharacterState != ECharacterState::ECS_Unequipped;
-	
+
 }
 
 bool ASlashCharacter::CanArm()
 {
-	 return ActionState == EActionState::EAS_Unoccupied && CharacterState == ECharacterState::ECS_Unequipped ;
-	
+	return ActionState == EActionState::EAS_Unoccupied && CharacterState == ECharacterState::ECS_Unequipped;
+
 }
 
 void ASlashCharacter::Tick(float DeltaTime)
