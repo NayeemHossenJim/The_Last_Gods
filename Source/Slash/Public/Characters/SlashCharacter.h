@@ -38,6 +38,15 @@ protected:
 	void PlayEquipMontage(FName SectionName);
 	bool CanDisArm();
 	bool CanArm();
+
+	UFUNCTION(BlueprintCallable)
+	void DisArm();
+
+	UFUNCTION(BlueprintCallable)
+	void Arm();
+
+	UFUNCTION(BlueprintCallable)
+	void FinishEquipping();
 private:
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
 
