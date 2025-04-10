@@ -31,6 +31,9 @@ private:
 	UPROPERTY(EditDefaultsOnly,Category = Montage)
 	UAnimMontage* HitReactMontage;
 
+	UPROPERTY(EditDefaultsOnly, Category = Montage)
+	UAnimMontage* DeathMontage;
+
 	UPROPERTY(EditAnywhere,Category = Sounds)
 	USoundBase* HitSound ;
 
@@ -38,6 +41,7 @@ private:
 	UParticleSystem* HitParticles ;
 protected:
 	virtual void BeginPlay() override;
+	void Die();
 	void PlayHitReactMontage(const FName& SectionName);
 public:	
 };
