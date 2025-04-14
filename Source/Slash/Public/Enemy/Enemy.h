@@ -53,11 +53,18 @@ private:
 	UPROPERTY(EditInstanceOnly, Category = "AI Navigation")
 	TArray<AActor*> PatrolTargets;
 
+	UPROPERTY(EditAnywhere)
+	double PatrolRadius = 200.f;
+
+	UPROPERTY(EditAnywhere, Category = "Death")
+	float DeathLifeSpan = 5.f;
+
 	UPROPERTY()
 	class AAIController* EnemyController;
 protected:
 	virtual void BeginPlay() override;
 	void Die();
+	bool InTargetRange(AActor* Target, double Radius);
 	void PlayHitReactMontage(const FName& SectionName);
 	UPROPERTY(BlueprintReadOnly)
 	EDeathPose DeathPose = EDeathPose::EDP_Alive;
