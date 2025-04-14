@@ -1,6 +1,6 @@
 # Slash: An Epic Adventure Game
 
-![Ancient Treasures](AncientTreasures.png)
+![Ancient Treasures](Slash.png)
 
 Welcome to **Slash**, an immersive and action-packed game development project built with Unreal Engine. This repository contains all the assets, configurations, and source code required to bring this epic adventure to life.
 
@@ -67,12 +67,6 @@ Here's a quick overview of the project's structure:
 
 ---
 
-## 📸 Screenshots
-
-![Auto Screenshot](Saved/AutoScreenshot.png)
-
----
-
 ## 🤝 Contributing
 
 We welcome contributions to enhance the game! Feel free to submit pull requests or report issues.
@@ -82,14 +76,6 @@ We welcome contributions to enhance the game! Feel free to submit pull requests 
 ## 📜 License
 
 This project is licensed under the [MIT License](LICENSE).
-
----
-
-## 🌐 Connect with Us
-
-- 🌍 **Website**: [SlashGame.com](https://slashgame.com)
-- 🐦 **Twitter**: [@SlashGame](https://twitter.com/SlashGame)
-- 💬 **Discord**: [Join our community](https://discord.gg/slashgame)
 
 ---
 
