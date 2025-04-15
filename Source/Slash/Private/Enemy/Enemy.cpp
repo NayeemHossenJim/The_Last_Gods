@@ -40,6 +40,10 @@ AEnemy::AEnemy()
 
 void AEnemy::PatrolTimerFinished()
 {
+	if (!PatrolTarget)
+	{
+		PatrolTarget = ChoosePatrolTarget();
+	}
 	if (PatrolTarget)
 	{
 		MoveToTarget(PatrolTarget);
@@ -107,6 +111,11 @@ void AEnemy::Die()
 		HealthBarWidget->SetVisibility(false);
 	}
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetCharacterMovement()->DisableMovement();
+	if (EnemyController)
+	{
+		EnemyController->StopMovement();
+	}
 	SetLifeSpan(DeathLifeSpan);
 }
 
@@ -161,20 +170,24 @@ AActor* AEnemy::ChoosePatrolTarget()
 			ValidTargets.AddUnique(Target);
 		}
 	}
+
 	if (ValidTargets.Num() > 0)
 	{
 		if (ValidTargets.Num() == 1)
 		{
-			return ValidTargets[0];
+			return ValidTargets[0]; 
 		}
+
 		AActor* NewTarget = nullptr;
 		do
 		{
 			const int32 TargetSelection = FMath::RandRange(0, ValidTargets.Num() - 1);
 			NewTarget = ValidTargets[TargetSelection];
-		} while (NewTarget == PatrolTarget && ValidTargets.Num() > 1);
+		} while (NewTarget == PatrolTarget);
+
 		return NewTarget;
 	}
+
 	return nullptr;
 }
 
