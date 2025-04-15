@@ -9,6 +9,7 @@
 class UAnimMontage;
 class UAttributeComponent;
 class UHealthBarComponent;
+class UPawnSensingComponent;
 
 UCLASS()
 class SLASH_API AEnemy : public ACharacter,public IHitInterface
@@ -70,14 +71,22 @@ private:
 	UPROPERTY(EditAnywhere, Category = "AI Navigation")
 	float WaitMax = 8.f;
 
+	UPROPERTY(VisibleAnywhere)
+	UPawnSensingComponent* PawnSensing;
+
 	UPROPERTY()
 	class AAIController* EnemyController;
+
+	EEnemyState EnemyState = EEnemyState::EES_Patrolling;
 protected:
 	virtual void BeginPlay() override;
 	void Die();
 	bool InTargetRange(AActor* Target, double Radius);
 	void PlayHitReactMontage(const FName& SectionName);
 	void MoveToTarget(AActor* Target);
+	UFUNCTION()
+	void PawnSeen(APawn* SeenPawn);
+
 	AActor* ChoosePatrolTarget();
 	UPROPERTY(BlueprintReadOnly)
 	EDeathPose DeathPose = EDeathPose::EDP_Alive;
