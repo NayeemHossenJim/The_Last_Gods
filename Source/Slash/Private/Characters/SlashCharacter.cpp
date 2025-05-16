@@ -152,7 +152,6 @@ bool ASlashCharacter::CanAttack()
 
 bool ASlashCharacter::CanDisArm()
 {
-	//return ActionState == EActionState::EAS_Unoccupied && CharacterState != ECharacterState::ECS_Unequipped;
 	bool result = ActionState == EActionState::EAS_Unoccupied &&
 		CharacterState == ECharacterState::ECS_EquippedOneHandedWeapon &&
 		EquippedWeapon != nullptr;
@@ -161,7 +160,6 @@ bool ASlashCharacter::CanDisArm()
 
 bool ASlashCharacter::CanArm()
 {
-	//return ActionState == EActionState::EAS_Unoccupied && CharacterState == ECharacterState::ECS_Unequipped;
 	bool result = ActionState == EActionState::EAS_Unoccupied &&
 		CharacterState == ECharacterState::ECS_Unequipped &&
 		EquippedWeapon != nullptr;
@@ -206,13 +204,4 @@ void ASlashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	PlayerInputComponent->BindAction(FName("Jump"), IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction(FName("Equip"), IE_Pressed, this, &ASlashCharacter::EKeyPressed);
 	PlayerInputComponent->BindAction(FName("Attack"), IE_Pressed, this, &ASlashCharacter::Attack);
-}
-
-void ASlashCharacter::SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnabled)
-{
-	if (EquippedWeapon && EquippedWeapon->GetWeaponBox())
-	{
-		EquippedWeapon->GetWeaponBox()->SetCollisionEnabled(CollisionEnabled);
-		EquippedWeapon->IgnoreActors.Empty();
-	}
 }
