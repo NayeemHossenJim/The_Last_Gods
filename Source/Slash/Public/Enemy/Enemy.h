@@ -71,6 +71,8 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Die() override;
 	virtual void Attack() override;
+	void ResetCanAttack();
+	bool bCanAttack = true;
 	virtual void PlayAttackMontage() override;
 	bool InTargetRange(AActor* Target, double Radius);
 	void MoveToTarget(AActor* Target);

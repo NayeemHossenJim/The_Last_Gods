@@ -129,7 +129,14 @@ void AEnemy::Die()
 void AEnemy::Attack()
 {
 	Super::Attack();
+	if (!bCanAttack) return; 
+	bCanAttack = false; 
 	PlayAttackMontage();
+}
+
+void AEnemy::ResetCanAttack()
+{
+	bCanAttack = true;
 }
 
 void AEnemy::PlayAttackMontage()
