@@ -28,6 +28,10 @@ protected:
 	void PlayHitReactMontage(const FName& SectionName);
 	void DirectionalHitReact(const FVector& ImpactPoint);
 	virtual bool CanAttack();
+	bool isAlive();
+	void PlayHitSound(const FVector& ImpactPoint);
+	void SpawnHitParticles(const FVector& ImpactPoint);
+	virtual void HandleDamage(float DamageAmount);
 
 	UFUNCTION(BlueprintCallable)
 	virtual void AttackEnd();
@@ -46,6 +50,7 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	UAttributeComponent* Attributes;
+private:
 
 	UPROPERTY(EditAnywhere, Category = Sounds)
 	USoundBase* HitSound;
