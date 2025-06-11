@@ -106,7 +106,7 @@ bool AEnemy::IsChasing()
 
 bool AEnemy::IsAttacking()
 {
-	return EnemyState != EEnemyState::EES_Attacking;
+	return EnemyState == EEnemyState::EES_Attacking;
 }
 
 bool AEnemy::IsDead()
@@ -209,16 +209,23 @@ void AEnemy::Die()
 	if (EnemyController)
 	{
 		EnemyController->StopMovement();
-	}
+	} 
 	SetLifeSpan(DeathLifeSpan);
 }
 
 void AEnemy::Attack()
 {
 	Super::Attack();
-	if (!bCanattack) return; 
+	if (!bCanattack) return;
 	bCanattack = false; 
 	PlayAttackMontage();
+	const float AttackCooldown = 1.0f;
+	GetWorldTimerManager().SetTimer(
+		AttackTimerHandle,
+		this,
+		&AEnemy::ResetCanAttack,
+		AttackCooldown
+	);
 }
 
 void AEnemy::HandleDamage(float DamageAmount)
@@ -394,8 +401,16 @@ void AEnemy::GetHit_Implementation(const FVector& ImpactPoint)
 float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	HandleDamage(DamageAmount);
+	if (Attributes->Isdead())
+	{
+		Die();
+		return DamageAmount;
+	}
 	CombatTarget = EventInstigator->GetPawn();
-	ChaseTarget();
+	if (!IsDead())
+	{
+		ChaseTarget();
+	}
 	return DamageAmount;
 }
 

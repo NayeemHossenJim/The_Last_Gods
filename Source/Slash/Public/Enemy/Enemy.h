@@ -92,6 +92,7 @@ private:
 	void StartAttackTimer();
 	void ClearAttackTimer();
 	FTimerHandle AttackTimer;
+	FTimerHandle AttackTimerHandle;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	float AttackMin = 0.5f;
@@ -115,7 +116,7 @@ protected:
 
 	AActor* ChoosePatrolTarget();
 	UPROPERTY(BlueprintReadOnly)
-	EDeathPose DeathPose ;
+	EDeathPose DeathPose = EDeathPose::EDP_Alive ;
 
 	UPROPERTY(BlueprintReadOnly)
 	EEnemyState EnemyState = EEnemyState::EES_Patrolling;
