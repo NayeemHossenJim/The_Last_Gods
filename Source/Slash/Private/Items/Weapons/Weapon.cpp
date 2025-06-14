@@ -38,11 +38,11 @@ void AWeapon::Equip(USceneComponent* InParent, FName InSocketName, AActor* NewOw
 	DisableSphereCollision();
 	PlayEquipSound();
 	DeactivateEmbers();
-}
+} 
 
 void AWeapon::DeactivateEmbers()
 {
-	if (EmbersEffect)
+	if (EmbersEffect) 
 	{
 		EmbersEffect->Deactivate();
 	}
@@ -56,7 +56,7 @@ void AWeapon::DisableSphereCollision()
 	}
 }
 
-void AWeapon::PlayEquipSound()
+void AWeapon::PlayEquipSound()  
 {
 	if (EquipSound)
 	{
@@ -73,25 +73,40 @@ void AWeapon::AttachMeshToComponent(USceneComponent* InParent, const FName& InSo
 {
 	FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
 	ItemMesh->AttachToComponent(InParent, TransformRules, InSocketName);
-}
+} 
 
 void AWeapon::OnBoxOverLap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (ActorIsSameType(OtherActor)) return;
+	if (OtherActor == GetOwner())
+	{
+		return;
+	}
+
 	FHitResult BoxHit;
-	BoxTrace(BoxHit);
+	BoxTrace(BoxHit);  
+
 	if (BoxHit.GetActor())
 	{
-		if (ActorIsSameType(BoxHit.GetActor())) return;
+		if (BoxHit.GetActor() == GetOwner())
+		{
+			return;
+		}
+
+		if (ActorIsSameType(BoxHit.GetActor()))
+		{
+			return; 
+		}
+
 		UGameplayStatics::ApplyDamage(BoxHit.GetActor(), Damage, GetInstigatorController(), this, UDamageType::StaticClass());
 		ExecuteGetHit(BoxHit);
 		CreateFields(BoxHit.ImpactPoint);
 	}
 }
 
+
 bool AWeapon::ActorIsSameType(AActor* OtherActor)
 {
-	return GetOwner()->ActorHasTag(TEXT("Enemy")) && OtherActor->ActorHasTag(TEXT("Enemy"));
+	return GetOwner()->ActorHasTag(FName("Enemy")) && OtherActor->ActorHasTag(FName("Enemy"));
 }
 
 void AWeapon::ExecuteGetHit(FHitResult& BoxHit)
