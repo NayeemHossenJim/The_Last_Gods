@@ -29,7 +29,6 @@ protected:
 	void EKeyPressed();
 	virtual void Attack() override;
 
-	virtual void PlayAttackMontage() override;
 	virtual void AttackEnd() override;
 	virtual bool CanAttack() override;
 
