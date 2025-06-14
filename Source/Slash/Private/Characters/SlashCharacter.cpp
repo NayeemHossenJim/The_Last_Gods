@@ -1,5 +1,6 @@
 #include "Characters/SlashCharacter.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Items/Item.h"
@@ -15,6 +16,12 @@ ASlashCharacter::ASlashCharacter()
 	bUseControllerRotationRoll = false;
 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
+
+	GetMesh()->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
+	GetMesh()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block);
+	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);
+	GetMesh()->SetGenerateOverlapEvents(true);
 
 	Cameraboom = CreateDefaultSubobject<USpringArmComponent>(TEXT("Cameraboom"));
 	Cameraboom->SetupAttachment(GetRootComponent());
@@ -36,11 +43,17 @@ void ASlashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	PlayerInputComponent->BindAction(FName("Attack"), IE_Pressed, this, &ASlashCharacter::Attack);
 }
 
+void ASlashCharacter::GetHit_Implementation(const FVector& ImpactPoint)
+{
+	PlayHitSound(ImpactPoint);
+	SpawnHitParticles(ImpactPoint);
+}
+
 void ASlashCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Tags.Add(FName("SlashCharacter"));
+	Tags.Add(FName("EngageableTarget"));
 }
 
 void ASlashCharacter::MoveForward(float Value)
