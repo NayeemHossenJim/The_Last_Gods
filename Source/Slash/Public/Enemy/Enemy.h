@@ -47,6 +47,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	EEnemyState EnemyState = EEnemyState::EES_Patrolling;
+
+	UPROPERTY(BlueprintReadOnly, Category = Combat)
+	AActor* CombatTarget;
 private:
 
 	/** AI Behavior */
@@ -87,9 +90,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class AWeapon> WeaponClass;
 
-	UPROPERTY()
-	AActor* CombatTarget;
-
 	UPROPERTY(EditAnywhere)
 	double CombatRadius = 500.f;
 
@@ -123,14 +123,14 @@ private:
 	FTimerHandle AttackTimer;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	float AttackMin = 0.5f;
+	float AttackMin = 0.1f;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	float AttackMax = 1.f;
+	float AttackMax = 0.4f;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	float ChasingSpeed = 300.f;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	float DeathLifeSpan = 8.f;
+	float DeathLifeSpan = 5.f;
 };
