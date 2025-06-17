@@ -312,6 +312,7 @@ void AEnemy::SpawnDefaultWeapon()
 
 void AEnemy::PawnSeen(APawn* SeenPawn)
 {
+	if (!SeenPawn || SeenPawn->ActorHasTag(FName("Dead"))) return;
 	const bool bShouldChaseTarget =
 		EnemyState != EEnemyState::EES_Dead &&
 		EnemyState != EEnemyState::EES_Chasing &&
