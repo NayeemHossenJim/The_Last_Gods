@@ -76,6 +76,10 @@ void AEnemy::GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter)
 	ClearAttackTimer();
 	SetWeaponCollisionEnabled(ECollisionEnabled::NoCollision);
 	StopAttackMontage();
+	if (CanAttack())
+	{
+		Attack();
+	}
 }
 
 void AEnemy::BeginPlay()
@@ -119,7 +123,10 @@ bool AEnemy::CanAttack()
 void AEnemy::AttackEnd()
 {
 	EnemyState = EEnemyState::EES_NoState;
-	CheckCombatTarget();
+	if (CombatTarget && !IsDead()) 
+	{
+		CheckCombatTarget(); 
+	}
 }
 
 void AEnemy::HandleDamage(float DamageAmount)
