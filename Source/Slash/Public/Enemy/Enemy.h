@@ -14,7 +14,6 @@ class SLASH_API AEnemy : public ABaseCharacter
 	GENERATED_BODY()
 
 public:
-
 	AEnemy();
 
 	/** <AActor> */
@@ -28,7 +27,6 @@ public:
 	/** </IHitInterface> */
 
 protected:
-
 	/** <AActor> */
 	virtual void BeginPlay() override;
 	/** </AActor> */
@@ -41,6 +39,7 @@ protected:
 	virtual void AttackEnd() override;
 	virtual void HandleDamage(float DamageAmount) override;
 	/** </ABaseCharacter> */
+
 	UPROPERTY(BlueprintReadOnly)
 	EEnemyState EnemyState = EEnemyState::EES_Patrolling;
 
@@ -88,7 +87,7 @@ private:
 	double CombatRadius = 500.f;
 
 	UPROPERTY(EditAnywhere)
-	double AttackRadius = 200.f;
+	double AttackRadius = 150.f;
 
 	UPROPERTY()
 	class AAIController* EnemyController;
@@ -106,10 +105,10 @@ private:
 	FTimerHandle PatrolTimer;
 
 	UPROPERTY(EditAnywhere, Category = "AI Navigation")
-	float PatrolWaitMin = 3.f;
+	float PatrolWaitMin = 5.f;
 
 	UPROPERTY(EditAnywhere, Category = "AI Navigation")
-	float PatrolWaitMax = 8.f;
+	float PatrolWaitMax = 10.f;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	float PatrollingSpeed = 125.f;
@@ -117,16 +116,16 @@ private:
 	FTimerHandle AttackTimer;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	float AttackMin = 0.1f;
+	float AttackMin = 0.5f;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	float AttackMax = 0.4f;
+	float AttackMax = 1.f;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	float ChasingSpeed = 300.f;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	float DeathLifeSpan = 5.f;
+	float DeathLifeSpan = 8.f;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	TSubclassOf<class ASoul> SoulClass;

@@ -138,10 +138,7 @@ bool AEnemy::CanAttack()
 void AEnemy::AttackEnd()
 {
 	EnemyState = EEnemyState::EES_NoState;
-	if (CombatTarget && !IsDead()) 
-	{
-		CheckCombatTarget(); 
-	}
+	CheckCombatTarget();
 }
 
 void AEnemy::HandleDamage(float DamageAmount)
@@ -156,6 +153,7 @@ void AEnemy::HandleDamage(float DamageAmount)
 void AEnemy::InitializeEnemy()
 {
 	EnemyController = Cast<AAIController>(GetController());
+	MoveToTarget(PatrolTarget);
 	HideHealthBar();
 	SpawnDefaultWeapon();
 }
