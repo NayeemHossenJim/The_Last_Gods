@@ -26,9 +26,14 @@ bool UAttributeComponent::IsAlive()
 	return Health > 0.f;
 }
 
-bool UAttributeComponent::Isdead()
+void UAttributeComponent::AddSouls(int32 NumberOfSouls)
 {
-	return Health <= 0.f;
+	Souls += NumberOfSouls;
+}
+
+void UAttributeComponent::AddGold(int32 AmountOfGold)
+{
+	Gold += AmountOfGold;
 }
 
 void UAttributeComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
