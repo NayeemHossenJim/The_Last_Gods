@@ -285,7 +285,7 @@ void ASlashCharacter::Die()
 		RestartTimerHandle,
 		this,
 		&ASlashCharacter::RestartLevel,
-		3.0f,
+		5.0f,
 		false
 	);
 }
