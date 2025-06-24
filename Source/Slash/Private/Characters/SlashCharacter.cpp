@@ -11,6 +11,7 @@
 #include "HUD/SlashOverlay.h"
 #include "Items/Soul.h"
 #include "Items/Treasure.h"
+#include "Kismet/GameplayStatics.h"
 
 ASlashCharacter::ASlashCharacter()
 {
@@ -277,6 +278,32 @@ void ASlashCharacter::Die()
 	Super::Die();
 	ActionState = EActionState::EAS_Dead;
 	DisableMeshCollision();
+
+	// Add a delay before restarting the level
+	FTimerHandle RestartTimerHandle;
+	GetWorldTimerManager().SetTimer(
+		RestartTimerHandle,
+		this,
+		&ASlashCharacter::RestartLevel,
+		3.0f,
+		false
+	);
+}
+
+void ASlashCharacter::RestartLevel()
+{
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		FName CurrentLevel = *World->GetMapName();
+		FString LevelName = CurrentLevel.ToString();
+		int32 LastUnderscore;
+		if (LevelName.FindLastChar('_', LastUnderscore))
+		{
+			LevelName = LevelName.RightChop(LastUnderscore + 1);
+		}
+		UGameplayStatics::OpenLevel(this, FName(*LevelName));
+	}
 }
 
 bool ASlashCharacter::HasEnoughStamina()
