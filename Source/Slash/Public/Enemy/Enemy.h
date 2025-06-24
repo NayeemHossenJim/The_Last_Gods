@@ -72,7 +72,7 @@ private:
 
 
 	UFUNCTION()
-	void PawnSeen(APawn* SeenPawn); // Callback for OnPawnSeen in UPawnSensingComponent
+	void PawnSeen(APawn* SeenPawn);
 
 	UPROPERTY(VisibleAnywhere)
 	UHealthBarComponent* HealthBarWidget;
