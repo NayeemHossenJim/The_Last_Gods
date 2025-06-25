@@ -84,7 +84,7 @@ void AEnemy::GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter)
 	if (IsInsideAttackRadius())
 	{
 		if(!IsDead()) StartAttackTimer();
-}
+	}
 }
 
 void AEnemy::BeginPlay()
